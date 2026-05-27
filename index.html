@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <meta name="description" content="A clean, minimalist Tic-Tac-Toe game with local 2-player mode and smart AI.">
+  
+  <!-- Modern Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <h1>Tic-Tac-Toe</h1>
+    </header>
+
+    <!-- Game Settings Options -->
+    <div class="settings-panel">
+      <div class="setting-group">
+        <label for="mode-select">Game Mode</label>
+        <div class="toggle-buttons" id="mode-select">
+          <button class="toggle-btn active" data-mode="pvp">vs Friend</button>
+          <button class="toggle-btn" data-mode="ai">vs AI</button>
+        </div>
+      </div>
+
+      <div class="setting-group hidden" id="difficulty-group">
+        <label for="diff-select">Difficulty</label>
+        <div class="toggle-buttons" id="diff-select">
+          <button class="toggle-btn" data-diff="easy">Easy</button>
+          <button class="toggle-btn active" data-diff="medium">Medium</button>
+          <button class="toggle-btn" data-diff="hard">Unbeatable</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar / Turn Info -->
+    <div class="status-bar" id="game-status">
+      Player <span class="current-turn">X</span>'s Turn
+    </div>
+
+    <!-- Board Area -->
+    <div class="board-wrapper">
+      <div class="game-board" id="board">
+        <button class="cell" data-index="0" aria-label="Cell 1"></button>
+        <button class="cell" data-index="1" aria-label="Cell 2"></button>
+        <button class="cell" data-index="2" aria-label="Cell 3"></button>
+        
+        <button class="cell" data-index="3" aria-label="Cell 4"></button>
+        <button class="cell" data-index="4" aria-label="Cell 5"></button>
+        <button class="cell" data-index="5" aria-label="Cell 6"></button>
+        
+        <button class="cell" data-index="6" aria-label="Cell 7"></button>
+        <button class="cell" data-index="7" aria-label="Cell 8"></button>
+        <button class="cell" data-index="8" aria-label="Cell 9"></button>
+      </div>
+
+      <!-- Simple Result Overlay over the board -->
+      <div class="result-overlay" id="result-overlay">
+        <h2 id="result-message">Player X Wins!</h2>
+        <button class="play-again-btn" id="play-again-btn">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <div class="score-box">
+        <div class="score-lbl" id="score-lbl-x">Player X</div>
+        <div class="score-val" id="score-val-x">0</div>
+      </div>
+      <div class="score-box">
+        <div class="score-lbl">Draws</div>
+        <div class="score-val" id="score-val-draws">0</div>
+      </div>
+      <div class="score-box">
+        <div class="score-lbl" id="score-lbl-o">Player O</div>
+        <div class="score-val" id="score-val-o">0</div>
+      </div>
+    </div>
+
+    <!-- Footer Controls -->
+    <div class="footer-actions">
+      <button class="action-link" id="reset-board-btn">Restart Board</button>
+      <button class="action-link" id="reset-scores-btn">Reset Scores</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
