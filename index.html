@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic-Tac-Toe</title>
   <meta name="description" content="A clean, minimalist Tic-Tac-Toe game with local 2-player mode and smart AI.">
-  
-  <!-- Modern Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +16,6 @@
       <h1>Tic-Tac-Toe</h1>
     </header>
 
-    <!-- Game Settings Options -->
     <div class="settings-panel">
       <div class="setting-group">
         <label for="mode-select">Game Mode</label>
@@ -39,12 +35,10 @@
       </div>
     </div>
 
-    <!-- Status Bar / Turn Info -->
     <div class="status-bar" id="game-status">
       Player <span class="current-turn">X</span>'s Turn
     </div>
 
-    <!-- Board Area -->
     <div class="board-wrapper">
       <div class="strike-line" id="strike-line"></div>
       <div class="game-board" id="board">
@@ -61,14 +55,12 @@
         <button class="cell" data-index="8" aria-label="Cell 9"></button>
       </div>
 
-      <!-- Simple Result Overlay over the board -->
       <div class="result-overlay" id="result-overlay">
         <h2 id="result-message">Player X Wins!</h2>
         <button class="play-again-btn" id="play-again-btn">Play Again</button>
       </div>
     </div>
 
-    <!-- Scoreboard -->
     <div class="scoreboard">
       <div class="score-box">
         <div class="score-lbl" id="score-lbl-x">Player X</div>
@@ -84,7 +76,6 @@
       </div>
     </div>
 
-    <!-- Footer Controls -->
     <div class="footer-actions">
       <button class="action-link" id="reset-board-btn">Restart Board</button>
       <button class="action-link" id="reset-scores-btn">Reset Scores</button>

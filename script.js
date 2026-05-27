@@ -1,16 +1,8 @@
-/**
- * TIC-TAC-TOE - GAME ENGINE
- * A clean, human-written, easy-to-understand codebase.
- */
-
-// ----------------------------------------------------
-// 1. STATE VARIABLES
-// ----------------------------------------------------
 let board = Array(9).fill(null);
 let currentPlayer = 'X';
 let gameActive = true;
-let gameMode = 'pvp'; // 'pvp' or 'ai'
-let difficulty = 'medium'; // 'easy', 'medium', 'hard'
+let gameMode = 'pvp';
+let difficulty = 'medium';
 
 let scores = {
   pvp: { x: 0, o: 0, draws: 0 },
@@ -18,14 +10,11 @@ let scores = {
 };
 
 const WIN_COMBOS = [
-  [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-  [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-  [0, 4, 8], [2, 4, 6]             // Diagonals
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
 ];
 
-// ----------------------------------------------------
-// 2. DOM SELECTORS
-// ----------------------------------------------------
 const cells = document.querySelectorAll('.cell');
 const statusText = document.querySelector('.current-turn');
 const modeButtons = document.querySelectorAll('#mode-select .toggle-btn');
@@ -45,9 +34,6 @@ const playAgainBtn = document.getElementById('play-again-btn');
 const resetBoardBtn = document.getElementById('reset-board-btn');
 const resetScoresBtn = document.getElementById('reset-scores-btn');
 
-// ----------------------------------------------------
-// 3. INITIALIZATION & STORAGE
-// ----------------------------------------------------
 function init() {
   loadScores();
   setupEventListeners();
@@ -63,7 +49,7 @@ function loadScores() {
         scores = parsed;
       }
     } catch (e) {
-      console.warn('Error loading scores:', e);
+      console.warn(e);
     }
   }
 }
@@ -72,11 +58,7 @@ function saveScores() {
   localStorage.setItem('tictactoe_scores', JSON.stringify(scores));
 }
 
-// ----------------------------------------------------
-// 4. EVENT LISTENERS
-// ----------------------------------------------------
 function setupEventListeners() {
-  // Cell clicks
   cells.forEach(cell => {
     cell.addEventListener('click', () => {
       const index = parseInt(cell.dataset.index);
@@ -84,7 +66,6 @@ function setupEventListeners() {
     });
   });
 
-  // Game Mode Selection
   modeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       modeButtons.forEach(b => b.classList.remove('active'));
@@ -102,7 +83,6 @@ function setupEventListeners() {
     });
   });
 
-  // Difficulty Selection
   diffButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       diffButtons.forEach(b => b.classList.remove('active'));
@@ -112,7 +92,6 @@ function setupEventListeners() {
     });
   });
 
-  // Replay actions
   playAgainBtn.addEventListener('click', () => {
     resultOverlay.classList.remove('active');
     resetBoard();
@@ -120,7 +99,6 @@ function setupEventListeners() {
 
   resetBoardBtn.addEventListener('click', resetBoard);
 
-  // Score reset
   resetScoresBtn.addEventListener('click', () => {
     if (confirm('Reset scoreboard?')) {
       if (gameMode === 'pvp') {
@@ -134,22 +112,16 @@ function setupEventListeners() {
   });
 }
 
-// ----------------------------------------------------
-// 5. GAME ACTIONS & LOOP
-// ----------------------------------------------------
 function handleMove(index) {
   if (!gameActive || board[index] !== null) return;
 
-  // Make Human Move
   makeMove(index, currentPlayer);
 
   if (!gameActive) return;
 
-  // Change Turn
   currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
   statusText.innerText = currentPlayer;
 
-  // If computer turn, handle AI move
   if (gameMode === 'ai' && currentPlayer === 'O') {
     disableBoard();
     setTimeout(() => {
@@ -162,7 +134,7 @@ function handleMove(index) {
           enableBoard();
         }
       }
-    }, 400); // 400ms delay to feel natural
+    }, 400);
   }
 }
 
@@ -178,7 +150,6 @@ function makeMove(index, player) {
 }
 
 function checkGameStatus() {
-  // Check Win Combinations
   for (let i = 0; i < WIN_COMBOS.length; i++) {
     const combo = WIN_COMBOS[i];
     const [a, b, c] = combo;
@@ -188,7 +159,6 @@ function checkGameStatus() {
     }
   }
 
-  // Check Draw
   if (board.every(cell => cell !== null)) {
     handleDraw();
   }
@@ -198,15 +168,12 @@ function handleWin(winner, combo, comboIndex) {
   gameActive = false;
   disableBoard();
 
-  // Highlight winning cells
   combo.forEach(idx => cells[idx].classList.add('win-highlight'));
 
-  // Activate strike-through line
   strikeLine.className = `strike-line strike-comb-${comboIndex} ${winner.toLowerCase()}-win`;
-  void strikeLine.offsetWidth; // Force CSS reflow
+  void strikeLine.offsetWidth;
   strikeLine.classList.add('active');
 
-  // Update Score State
   if (gameMode === 'pvp') {
     if (winner === 'X') scores.pvp.x++;
     else scores.pvp.o++;
@@ -218,7 +185,6 @@ function handleWin(winner, combo, comboIndex) {
   saveScores();
   updateScoreboardUI();
 
-  // Show Winner overlay
   setTimeout(() => {
     let msg = `Player ${winner} Wins!`;
     if (gameMode === 'ai') {
@@ -233,7 +199,6 @@ function handleDraw() {
   gameActive = false;
   disableBoard();
 
-  // Update Score State
   if (gameMode === 'pvp') {
     scores.pvp.draws++;
   } else {
@@ -243,7 +208,6 @@ function handleDraw() {
   saveScores();
   updateScoreboardUI();
 
-  // Show Draw overlay
   setTimeout(() => {
     resultMessage.innerText = "It's a Draw!";
     resultOverlay.classList.add('active');
@@ -294,9 +258,6 @@ function updateScoreboardUI() {
   }
 }
 
-// ----------------------------------------------------
-// 6. AI ALGORITHMS
-// ----------------------------------------------------
 function getWinner(tempBoard) {
   for (const combo of WIN_COMBOS) {
     const [a, b, c] = combo;
@@ -314,7 +275,7 @@ function getComputerMove() {
   } else if (difficulty === 'medium') {
     return getMediumMove();
   } else {
-    return getHardMove(); // Unbeatable Minimax
+    return getHardMove();
   }
 }
 
@@ -328,7 +289,6 @@ function getRandomMove() {
 }
 
 function getMediumMove() {
-  // 1. Can AI win immediately?
   for (let i = 0; i < 9; i++) {
     if (board[i] === null) {
       board[i] = 'O';
@@ -338,7 +298,6 @@ function getMediumMove() {
     }
   }
 
-  // 2. Can Player win immediately? Block it.
   for (let i = 0; i < 9; i++) {
     if (board[i] === null) {
       board[i] = 'X';
@@ -348,12 +307,10 @@ function getMediumMove() {
     }
   }
 
-  // 3. Take center cell with 50% probability
   if (board[4] === null && Math.random() < 0.5) {
     return 4;
   }
 
-  // 4. Default to random
   return getRandomMove();
 }
 
@@ -406,5 +363,4 @@ function minimax(tempBoard, depth, isMaximizing) {
   }
 }
 
-// Start Game
 window.addEventListener('DOMContentLoaded', init);

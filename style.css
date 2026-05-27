@@ -1,26 +1,21 @@
-/* ----------------------------------------------------
-   TIC-TAC-TOE - MINIMALIST SLATE THEME
----------------------------------------------------- */
-
 :root {
-  --bg-color: #0f172a;        /* slate-900 */
-  --card-bg: #1e293b;         /* slate-800 */
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
   --cell-bg: rgba(255, 255, 255, 0.03);
   --cell-border: rgba(255, 255, 255, 0.08);
   --cell-hover: rgba(255, 255, 255, 0.08);
   
-  --color-x: #38bdf8;         /* sky-400 */
-  --color-o: #fb7185;         /* rose-400 */
+  --color-x: #38bdf8;
+  --color-o: #fb7185;
   
-  --text-main: #f8fafc;       /* slate-50 */
-  --text-muted: #94a3b8;      /* slate-400 */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
   --border-color: rgba(255, 255, 255, 0.1);
   
   --font-family: 'Outfit', sans-serif;
   --board-size: 320px;
 }
 
-/* Reset and Core Layout */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,7 +33,6 @@ body {
   padding: 16px;
 }
 
-/* Single Game Card Layout */
 .game-container {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -60,7 +54,6 @@ body {
   text-align: center;
 }
 
-/* Settings Selectors */
 .settings-panel {
   width: 100%;
   display: flex;
@@ -115,7 +108,6 @@ body {
   display: none !important;
 }
 
-/* Status Bar */
 .status-bar {
   font-size: 0.95rem;
   font-weight: 600;
@@ -129,7 +121,6 @@ body {
   font-weight: 700;
 }
 
-/* Board Area */
 .board-wrapper {
   position: relative;
   width: var(--board-size);
@@ -168,7 +159,6 @@ body {
   cursor: not-allowed;
 }
 
-/* Cell Marks Styling */
 .cell.x-mark {
   color: var(--color-x);
 }
@@ -177,7 +167,6 @@ body {
   color: var(--color-o);
 }
 
-/* Winning Strike Highlight */
 .cell.win-highlight {
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.3);
@@ -191,14 +180,13 @@ body {
   text-shadow: 0 0 8px rgba(251, 113, 133, 0.4);
 }
 
-/* Result Overlay */
 .result-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(30, 41, 59, 0.95); /* matching var(--card-bg) */
+  background-color: rgba(30, 41, 59, 0.95);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -239,7 +227,6 @@ body {
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
 }
 
-/* Scoreboard */
 .scoreboard {
   width: 100%;
   display: flex;
@@ -283,7 +270,6 @@ body {
   color: var(--color-o);
 }
 
-/* Footer Actions */
 .footer-actions {
   display: flex;
   gap: 20px;
@@ -305,7 +291,6 @@ body {
   color: var(--text-main);
 }
 
-/* Strike Line Overlay */
 .strike-line {
   position: absolute;
   height: 4px;
@@ -327,7 +312,6 @@ body {
   box-shadow: 0 0 6px rgba(251, 113, 133, 0.4);
 }
 
-/* Horizontal rows */
 .strike-comb-0 { top: 15.8%; left: 7.5%; transform: rotate(0deg); }
 .strike-comb-0.active { width: 85%; }
 
@@ -337,7 +321,6 @@ body {
 .strike-comb-2 { top: 84.2%; left: 7.5%; transform: rotate(0deg); }
 .strike-comb-2.active { width: 85%; }
 
-/* Vertical columns */
 .strike-comb-3 { left: 15.8%; top: 7.5%; transform: rotate(90deg); }
 .strike-comb-3.active { width: 85%; }
 
@@ -347,20 +330,17 @@ body {
 .strike-comb-5 { left: 84.2%; top: 7.5%; transform: rotate(90deg); }
 .strike-comb-5.active { width: 85%; }
 
-/* Diagonals */
 .strike-comb-6 { top: 10.9%; left: 10.9%; transform: rotate(45deg); }
 .strike-comb-6.active { width: 110%; }
 
 .strike-comb-7 { top: 10.9%; left: 89.1%; transform: rotate(135deg); }
 .strike-comb-7.active { width: 110%; }
 
-/* CSS Keyframes */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(2px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive adjustment */
 @media (max-width: 360px) {
   :root {
     --board-size: 280px;
