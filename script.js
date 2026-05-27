@@ -33,6 +33,7 @@ const diffButtons = document.querySelectorAll('#diff-select .toggle-btn');
 const difficultyGroup = document.getElementById('difficulty-group');
 const resultOverlay = document.getElementById('result-overlay');
 const resultMessage = document.getElementById('result-message');
+const strikeLine = document.getElementById('strike-line');
 
 const scoreLblX = document.getElementById('score-lbl-x');
 const scoreLblO = document.getElementById('score-lbl-o');
@@ -178,10 +179,11 @@ function makeMove(index, player) {
 
 function checkGameStatus() {
   // Check Win Combinations
-  for (const combo of WIN_COMBOS) {
+  for (let i = 0; i < WIN_COMBOS.length; i++) {
+    const combo = WIN_COMBOS[i];
     const [a, b, c] = combo;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      handleWin(board[a], combo);
+      handleWin(board[a], combo, i);
       return;
     }
   }
@@ -192,12 +194,17 @@ function checkGameStatus() {
   }
 }
 
-function handleWin(winner, combo) {
+function handleWin(winner, combo, comboIndex) {
   gameActive = false;
   disableBoard();
 
   // Highlight winning cells
   combo.forEach(idx => cells[idx].classList.add('win-highlight'));
+
+  // Activate strike-through line
+  strikeLine.className = `strike-line strike-comb-${comboIndex} ${winner.toLowerCase()}-win`;
+  void strikeLine.offsetWidth; // Force CSS reflow
+  strikeLine.classList.add('active');
 
   // Update Score State
   if (gameMode === 'pvp') {
@@ -254,6 +261,7 @@ function resetBoard() {
     cell.removeAttribute('disabled');
   });
 
+  strikeLine.className = 'strike-line';
   statusText.innerText = currentPlayer;
   resultOverlay.classList.remove('active');
 }

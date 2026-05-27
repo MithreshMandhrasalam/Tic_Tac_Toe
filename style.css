@@ -305,6 +305,55 @@ body {
   color: var(--text-main);
 }
 
+/* Strike Line Overlay */
+.strike-line {
+  position: absolute;
+  height: 4px;
+  border-radius: 2px;
+  z-index: 5;
+  width: 0%;
+  transition: width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+.strike-line.x-win {
+  background-color: var(--color-x);
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+}
+
+.strike-line.o-win {
+  background-color: var(--color-o);
+  box-shadow: 0 0 6px rgba(251, 113, 133, 0.4);
+}
+
+/* Horizontal rows */
+.strike-comb-0 { top: 15.8%; left: 7.5%; transform: rotate(0deg); }
+.strike-comb-0.active { width: 85%; }
+
+.strike-comb-1 { top: 50%; left: 7.5%; transform: rotate(0deg); }
+.strike-comb-1.active { width: 85%; }
+
+.strike-comb-2 { top: 84.2%; left: 7.5%; transform: rotate(0deg); }
+.strike-comb-2.active { width: 85%; }
+
+/* Vertical columns */
+.strike-comb-3 { left: 15.8%; top: 7.5%; transform: rotate(90deg); }
+.strike-comb-3.active { width: 85%; }
+
+.strike-comb-4 { left: 50%; top: 7.5%; transform: rotate(90deg); }
+.strike-comb-4.active { width: 85%; }
+
+.strike-comb-5 { left: 84.2%; top: 7.5%; transform: rotate(90deg); }
+.strike-comb-5.active { width: 85%; }
+
+/* Diagonals */
+.strike-comb-6 { top: 10.9%; left: 10.9%; transform: rotate(45deg); }
+.strike-comb-6.active { width: 110%; }
+
+.strike-comb-7 { top: 10.9%; left: 89.1%; transform: rotate(135deg); }
+.strike-comb-7.active { width: 110%; }
+
 /* CSS Keyframes */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(2px); }
