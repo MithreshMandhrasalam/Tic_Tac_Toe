@@ -9,29 +9,13 @@ const statusText = document.querySelector('.current-turn');
 const resultOverlay = document.getElementById('result-overlay');
 const strikeLine = document.getElementById('strike-line');
 
-let board = Array(9).fill(null);
-let currentPlayer = 'X';
-let gameActive = true;
+let board = Array(9).fill(null), currentPlayer = 'X', gameActive = true;
 let scores = { x: 0, o: 0, draws: 0 };
 
-function loadScores() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('tictactoe_scores'));
-    if (saved) {
-      scores.x = saved.x ?? saved.pvp?.x ?? 0;
-      scores.o = saved.o ?? saved.pvp?.o ?? 0;
-      scores.draws = saved.draws ?? saved.pvp?.draws ?? 0;
-    }
-  } catch {}
-}
-
-const saveScores = () => localStorage.setItem('tictactoe_scores', JSON.stringify(scores));
-
-function updateScoreboardUI() {
-  document.getElementById('score-val-x').innerText = scores.x;
-  document.getElementById('score-val-draws').innerText = scores.draws;
-  document.getElementById('score-val-o').innerText = scores.o;
-}
+const updateScoreboard = () => {
+  localStorage.setItem('tictactoe_scores', JSON.stringify(scores));
+  ['x', 'draws', 'o'].forEach(k => document.getElementById(`score-val-${k}`).innerText = scores[k]);
+};
 
 function handleMove(index) {
   if (!gameActive || board[index]) return;
@@ -41,71 +25,46 @@ function handleMove(index) {
   cells[index].classList.add(`${currentPlayer.toLowerCase()}-mark`);
   cells[index].disabled = true;
 
-  const winComboIndex = WIN_COMBOS.findIndex(([a, b, c]) => board[a] && board[a] === board[b] && board[a] === board[c]);
+  const winIdx = WIN_COMBOS.findIndex(([a, b, c]) => board[a] && board[a] === board[b] && board[a] === board[c]);
   
-  if (winComboIndex !== -1) {
+  if (winIdx !== -1 || board.every(Boolean)) {
     gameActive = false;
     cells.forEach(c => c.disabled = true);
-    strikeLine.className = `strike-line strike-comb-${winComboIndex} ${currentPlayer.toLowerCase()}-win active`;
+    const won = winIdx !== -1;
+    if (won) {
+      strikeLine.className = `strike-line strike-comb-${winIdx} ${currentPlayer.toLowerCase()}-win active`;
+      scores[currentPlayer.toLowerCase()]++;
+    } else scores.draws++;
     
-    scores[currentPlayer.toLowerCase()]++;
-    saveScores();
-    updateScoreboardUI();
-
+    updateScoreboard();
     setTimeout(() => {
-      document.getElementById('result-message').innerText = `Player ${currentPlayer} Wins!`;
-      resultOverlay.classList.add('active');
-    }, 600);
-  } else if (board.every(Boolean)) {
-    gameActive = false;
-    cells.forEach(c => c.disabled = true);
-    scores.draws++;
-    saveScores();
-    updateScoreboardUI();
-
-    setTimeout(() => {
-      document.getElementById('result-message').innerText = "It's a Draw!";
+      document.getElementById('result-message').innerText = won ? `Player ${currentPlayer} Wins!` : "It's a Draw!";
       resultOverlay.classList.add('active');
     }, 600);
   } else {
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    statusText.innerText = currentPlayer;
+    statusText.innerText = currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
   }
 }
 
 function resetBoard() {
   board.fill(null);
-  currentPlayer = 'X';
   gameActive = true;
-  statusText.innerText = currentPlayer;
+  statusText.innerText = currentPlayer = 'X';
   strikeLine.className = 'strike-line';
   resultOverlay.classList.remove('active');
-  cells.forEach(c => {
-    c.innerText = '';
-    c.className = 'cell';
-    c.disabled = false;
-  });
+  cells.forEach(c => { c.innerText = ''; c.className = 'cell'; c.disabled = false; });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  loadScores();
-  
-  cells.forEach((cell, idx) => cell.addEventListener('click', () => handleMove(idx)));
-  
-  document.getElementById('play-again-btn').addEventListener('click', () => {
-    resultOverlay.classList.remove('active');
-    resetBoard();
-  });
-  
-  document.getElementById('reset-board-btn').addEventListener('click', resetBoard);
-  
-  document.getElementById('reset-scores-btn').addEventListener('click', () => {
+  try { scores = JSON.parse(localStorage.getItem('tictactoe_scores')) || scores; } catch {}
+  cells.forEach((cell, idx) => cell.onclick = () => handleMove(idx));
+  document.getElementById('play-again-btn').onclick = () => { resultOverlay.classList.remove('active'); resetBoard(); };
+  document.getElementById('reset-board-btn').onclick = resetBoard;
+  document.getElementById('reset-scores-btn').onclick = () => {
     if (confirm('Reset scoreboard?')) {
       scores = { x: 0, o: 0, draws: 0 };
-      saveScores();
-      updateScoreboardUI();
+      updateScoreboard();
     }
-  });
-
-  updateScoreboardUI();
+  };
+  updateScoreboard();
 });

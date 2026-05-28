@@ -101,18 +101,9 @@ body {
   transform: translateY(-1px);
 }
 
-.cell:disabled {
-  cursor: not-allowed;
-}
-
-.cell.x-mark {
-  color: var(--color-x);
-}
-
-.cell.o-mark {
-  color: var(--color-o);
-}
-
+.cell:disabled { cursor: not-allowed; }
+.cell.x-mark, #score-val-x { color: var(--color-x); }
+.cell.o-mark, #score-val-o { color: var(--color-o); }
 
 .result-overlay {
   position: absolute;
@@ -194,14 +185,6 @@ body {
 .score-val {
   font-size: 1.25rem;
   font-weight: 700;
-}
-
-#score-val-x {
-  color: var(--color-x);
-}
-
-#score-val-o {
-  color: var(--color-o);
 }
 
 .footer-actions {
