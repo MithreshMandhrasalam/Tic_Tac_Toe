@@ -54,8 +54,6 @@ body {
   text-align: center;
 }
 
-
-
 .status-bar {
   font-size: 0.95rem;
   font-weight: 600;
@@ -257,34 +255,21 @@ body {
   background-color: var(--color-o);
 }
 
-.strike-comb-0 { top: 15.8%; left: 7.5%; transform: rotate(0deg); }
-.strike-comb-0.active { width: 85%; }
-
-.strike-comb-1 { top: 50%; left: 7.5%; transform: rotate(0deg); }
-.strike-comb-1.active { width: 85%; }
-
-.strike-comb-2 { top: 84.2%; left: 7.5%; transform: rotate(0deg); }
-.strike-comb-2.active { width: 85%; }
-
-.strike-comb-3 { left: 15.8%; top: 7.5%; transform: rotate(90deg); }
-.strike-comb-3.active { width: 85%; }
-
-.strike-comb-4 { left: 50%; top: 7.5%; transform: rotate(90deg); }
-.strike-comb-4.active { width: 85%; }
-
-.strike-comb-5 { left: 84.2%; top: 7.5%; transform: rotate(90deg); }
-.strike-comb-5.active { width: 85%; }
-
+/* Strike-line combo positions */
+.strike-comb-0, .strike-comb-1, .strike-comb-2 { left: 7.5%; transform: rotate(0deg); }
+.strike-comb-3, .strike-comb-4, .strike-comb-5 { top: 7.5%; transform: rotate(90deg); }
 .strike-comb-6 { top: 10.9%; left: 10.9%; transform: rotate(45deg); }
-.strike-comb-6.active { width: 110%; }
-
 .strike-comb-7 { top: 10.9%; left: 89.1%; transform: rotate(135deg); }
-.strike-comb-7.active { width: 110%; }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(2px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+.strike-comb-0 { top: 15.8%; }
+.strike-comb-1 { top: 50%; }
+.strike-comb-2 { top: 84.2%; }
+.strike-comb-3 { left: 15.8%; }
+.strike-comb-4 { left: 50%; }
+.strike-comb-5 { left: 84.2%; }
+
+[class*="strike-comb-"].active { width: 85%; }
+.strike-comb-6.active, .strike-comb-7.active { width: 110%; }
 
 @media (max-width: 360px) {
   :root {
