@@ -1,16 +1,16 @@
 :root {
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --cell-bg: rgba(255, 255, 255, 0.03);
-  --cell-border: rgba(255, 255, 255, 0.08);
-  --cell-hover: rgba(255, 255, 255, 0.08);
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --cell-bg: #ffffff;
+  --cell-border: #e2e8f0;
+  --cell-hover: #f1f5f9;
   
-  --color-x: #38bdf8;
-  --color-o: #fb7185;
+  --color-x: #2563eb;
+  --color-o: #dc2626;
   
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
   
   --font-family: 'Outfit', sans-serif;
   --board-size: 320px;
@@ -40,7 +40,7 @@ body {
   padding: 24px;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,7 +76,7 @@ body {
 
 .toggle-buttons {
   display: flex;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #f1f5f9;
   border-radius: 8px;
   padding: 3px;
 }
@@ -101,7 +101,7 @@ body {
 .toggle-btn.active {
   background-color: var(--card-bg);
   color: var(--text-main);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
 .hidden {
@@ -168,16 +168,15 @@ body {
 }
 
 .cell.win-highlight {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: currentColor;
 }
 
 .cell.win-highlight.x-mark {
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+  background-color: rgba(37, 99, 235, 0.1);
 }
 
 .cell.win-highlight.o-mark {
-  text-shadow: 0 0 8px rgba(251, 113, 133, 0.4);
+  background-color: rgba(220, 38, 38, 0.1);
 }
 
 .result-overlay {
@@ -186,7 +185,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(30, 41, 59, 0.95);
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -224,7 +223,7 @@ body {
 
 .play-again-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
 }
 
 .scoreboard {
@@ -304,12 +303,10 @@ body {
 
 .strike-line.x-win {
   background-color: var(--color-x);
-  box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
 }
 
 .strike-line.o-win {
   background-color: var(--color-o);
-  box-shadow: 0 0 6px rgba(251, 113, 133, 0.4);
 }
 
 .strike-comb-0 { top: 15.8%; left: 7.5%; transform: rotate(0deg); }
