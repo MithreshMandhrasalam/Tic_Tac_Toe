@@ -113,17 +113,6 @@ body {
   color: var(--color-o);
 }
 
-.cell.win-highlight {
-  border-color: currentColor;
-}
-
-.cell.win-highlight.x-mark {
-  background-color: rgba(37, 99, 235, 0.1);
-}
-
-.cell.win-highlight.o-mark {
-  background-color: rgba(220, 38, 38, 0.1);
-}
 
 .result-overlay {
   position: absolute;

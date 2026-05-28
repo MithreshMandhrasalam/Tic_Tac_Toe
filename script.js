@@ -46,7 +46,6 @@ function handleMove(index) {
   if (winComboIndex !== -1) {
     gameActive = false;
     cells.forEach(c => c.disabled = true);
-    WIN_COMBOS[winComboIndex].forEach(idx => cells[idx].classList.add('win-highlight'));
     strikeLine.className = `strike-line strike-comb-${winComboIndex} ${currentPlayer.toLowerCase()}-win active`;
     
     scores[currentPlayer.toLowerCase()]++;
